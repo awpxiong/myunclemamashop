@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel{% endblock %}
+
+{% block content %}
+  <div class="banner-head">
+    <img src="{{ url_for('static', filename='/images/myunclemamashop.jpg') }}" alt="My Uncle Shop" width="1000" height="200">
+    <div style="background-color: lightgrey; margin-right: 295px;">
+    <h1>My Uncle's Minimart @ 123 Street</h1>
+    </div>
+  </div>
+  </hr>
+<div class="content-body">
+<div class="content-admin">
+  <div class="container mt-3">
+        <h2>Administrative Panel</h2>
+        <br>
+   <!-- Nav tabs -->
+     <ul class="nav nav-tabs">
+     <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#AddProd">Add Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#UpdateProd">Update Product</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#DeleteProd">Delete Product</a>
+    </li>
+    </ul>
+
+    <!-- Add Product -->
+    <div class="tab-content" style="margin-right: 280px;">
+      <div id="AddProd" class="container tab-pane active"><br>
+        <h3>Add a new Product</h3>
+        <form method ="POST">
+        <div class="form-group">
+        <label for="prodID">Product ID</label>
+        <input 
+        type="number"
+        class="form-control"
+        id="prodID"
+        name="prodID"
+        placeholder="Enter Product ID"
+        />
+         </div>
+        <div class="form-group">
+        <label for="prodname">Product Name</label>
+        <input 
+        type="text"
+        class="form-control"
+        id="prodname"
+        name="prodname"
+        placeholder="Enter Product Name"
+         />
+          </div>
+        <div class="form-group">
+        <label for="prodprice">Price</label>
+        <input 
+        type="text"
+        class="form-control"
+        id="prodprice"
+        name="prodprice"
+        placeholder="Enter Product Price $"
+        />
+         </div>
+        <br/>
+        <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+
+      <!-- Update Product -->
+      <div id="UpdateProd" class="container tab-pane fade"><br>
+       <h3>Update An Existing Product</h3>
+        <p>*List of Existing Products</p>
+         <div class="item-content">
+         {% for prod in products %}
+          <div type="submit" class="item_list" name="item_list" tabindex="-1">
+            <p id="up_prodID" name="up_prodID" value="{{ prod.prod_id }}">Product ID:{{ prod.prod_id }}</p>
+            <p id="up_prodname" name="up_prodname" value="{{ prod.prod_name }}">Product Name:{{ prod.prod_name }}</p>
+            <p id="up_prodprice" name="up_prodprice" value="{{ prod.prod_price }}">Product Price: ${{ prod.prod_price }}</p>
+         <hr>
+          </div>
+         {% endfor %}
+          </div>
+       <div class ="content-modify" style="display: inline-block; margin-left: 80px; vertical-align: top;">
+       <p><b>Update Product</b></p>
+       <p>You can not Modify the product ID of any Products</p>
+        <form action="/admin/update" id="updateform" name="updateform" method ="POST">
+       <div class="form-group">
+        <label for="prodid">Product ID (Enter Existing Product ID)</label>
+        <input 
+        type="number"
+        class="form-control"
+        id="prodID"
+        name="prodID"
+        placeholder="Enter an existing Product ID"
+       />
+       </div>
+       <div class="form-group">
+        <label for="prodname">Product Name (New)</label>
+        <input 
+        type="text"
+        class="form-control"
+        id="prodname"
+        name="prodname"
+        placeholder="Modify a new Product Name"
+      
+       />
+       </div>
+       <div class="form-group">
+        <label for="prodprice">Product Price (New)</label>
+        <input 
+        type="text"
+        class="form-control"
+        id="prodprice"
+        name="prodprice"
+        placeholder="Modify a new Product Price"
+      
+        />
+        </div>
+         <br>
+        <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+      </div>
+
+      <!-- Delete Product -->
+      <div id="DeleteProd" class="container tab-pane fade"><br>
+         <h3>Delete an existing Product</h3>
+        <p>*List of Existing Products</p>
+         <div class="item-content">
+         {% for prod in products %}
+          <div type="submit" class="item_list" name="item_list" tabindex="-1">
+            <p id="up_prodID" name="up_prodID" value="{{ prod.prod_id }}">Product ID:{{ prod.prod_id }}</p>
+            <p id="up_prodname" name="up_prodname" value="{{ prod.prod_name }}">Product Name:{{ prod.prod_name }}</p>
+            <p id="up_prodprice" name="up_prodprice" value="{{ prod.prod_price }}">Product Price: ${{ prod.prod_price }}</p>
+         <hr>
+          </div>
+         {% endfor %}
+          </div>
+       <div class ="content-modify" style="display: inline-block; margin-left: 50px; vertical-align: top;">
+       <p><b>Delete Product</b></p>
+       <p>Please enter a product ID OR a product name to delete</p>
+        <form action="/admin/delete" id="deleteform" name="deleteform" method ="POST">
+       <div class="form-group">
+        <label for="del_prodid">Product ID (Enter Existing Product ID)</label>
+        <input 
+        type="number"
+        class="form-control"
+        id="del_prodID"
+        name="del_prodID"
+        placeholder="Enter an existing Product ID"
+       />
+       </div>
+       <h3>OR</h3>
+       <div class="form-group">
+        <label for="del_prodname">Product Name (Enter Existing Product Name)</label>
+        <input 
+        type="text"
+        class="form-control"
+        id="del_prodname"
+        name="del_prodname"
+        placeholder="Enter an Existing Product Name"
+      
+       />
+       </div>
+         <br>
+        <button type="submit" class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+       </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

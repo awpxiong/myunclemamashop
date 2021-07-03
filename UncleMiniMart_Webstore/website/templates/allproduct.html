@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}All Products{% endblock %}
+
+{% block content %}
+  <div class="banner-head">
+  <img src="{{ url_for('static', filename='/images/myunclemamashop.jpg') }}" alt="My Uncle Shop" width="1000" height="200">
+    <div style="background-color: lightgrey; margin-right: 295px;">
+    <h1>My Uncle's Minimart @ 123 Street</h1>
+    </div>
+   </div>
+    </hr>
+     <div class="content-body">
+    <p>All Products</p>
+    <div class="content-newitems">
+    <div class="newitem">
+    {% for prod in products %}
+       <div class="newitem_column">
+       <p id="prod_id" name="prod_id">Product ID: {{ prod.prod_id }}</p>
+       <p id="prod_name" name="prod_name">Product Name: {{ prod.prod_name }}</p>
+        <p id="prod_price" name="prod_price">Product Price: ${{ prod.prod_price }}</p>
+       </div>
+     </div>
+     {% endfor %}
+    </div>
+  </div>
+  <div class="container">
+  <ul class="pagecontainer">
+    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+  </div>
+{% endblock %}
